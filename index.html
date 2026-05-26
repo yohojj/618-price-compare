@@ -25763,7 +25763,25 @@ function clearSearch() {
 })();
 </script>
 
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+// Load busuanzi with 5s timeout — if blocked/slow, silently hide
+(function() {
+    var script = document.createElement('script');
+    script.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+    script.async = true;
+    var timeout = setTimeout(function() {
+        var el = document.getElementById('visitor-count');
+        if (el) el.textContent = '';
+    }, 5000);
+    script.onload = function() { clearTimeout(timeout); };
+    script.onerror = function() {
+        clearTimeout(timeout);
+        var el = document.getElementById('visitor-count');
+        if (el) el.textContent = '';
+    };
+    document.body.appendChild(script);
+})();
+</script>
 
 </body>
 </html>
